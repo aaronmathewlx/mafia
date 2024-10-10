@@ -5,14 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mafia Game - Host Setup</title>
     <style>
-        /* Same purple-themed styling as before */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3e5f5;
+            color: #4a148c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4a148c;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            padding: 8px;
+            width: calc(100% - 20px);
+            border: 2px solid #7b1fa2;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #7b1fa2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4a148c;
+        }
+
+        p#generated-link {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #4a148c;
+        }
+
+        p#error-message {
+            color: red;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Mafia Game: Host Setup</h1>
 
-        <!-- Host panel for setting game constraints -->
         <div id="host-panel">
             <h2>Set Game Constraints</h2>
 
@@ -31,7 +91,7 @@
             <button onclick="generateLink()">Generate Link for Players</button>
 
             <p id="generated-link"></p>
-            <p id="error-message" style="color:red;"></p>
+            <p id="error-message"></p>
         </div>
     </div>
 
