@@ -62,11 +62,6 @@
             font-weight: bold;
             color: #4a148c;
         }
-
-        p#error-message {
-            color: red;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -79,7 +74,6 @@
             <button onclick="assignRole()">Get My Role</button>
 
             <p id="result"></p>
-            <p id="error-message"></p>
         </div>
     </div>
 
@@ -117,14 +111,6 @@
         function assignRole() {
             const playerName = document.getElementById('player-name').value.trim();
             const result = document.getElementById('result');
-            const errorMessage = document.getElementById('error-message');
-
-            if (!playerName) {
-                errorMessage.textContent = "Please enter your name.";
-                return;
-            }
-
-            errorMessage.textContent = ''; // Clear error
 
             if (assignedRoles[playerName]) {
                 result.textContent = `${playerName}, your role is: ${assignedRoles[playerName]}`;

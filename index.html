@@ -62,11 +62,6 @@
             font-weight: bold;
             color: #4a148c;
         }
-
-        p#error-message {
-            color: red;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -91,7 +86,6 @@
             <button onclick="generateLink()">Generate Link for Players</button>
 
             <p id="generated-link"></p>
-            <p id="error-message"></p>
         </div>
     </div>
 
@@ -101,29 +95,13 @@
             const numMafia = document.getElementById('num-mafia').value;
             const numDoctor = document.getElementById('num-doctor').value;
             const numCop = document.getElementById('num-cop').value;
-            const errorMessage = document.getElementById('error-message');
-            const generatedLink = document.getElementById('generated-link');
-
-            // Validation
-            if (!totalPlayers || !numMafia || !numDoctor || !numCop) {
-                errorMessage.textContent = "Please fill all the fields.";
-                return;
-            }
-
-            const numCitizens = totalPlayers - (numMafia + numDoctor + numCop);
-            if (numCitizens < 0) {
-                errorMessage.textContent = "Invalid player counts. Ensure total players >= number of roles.";
-                return;
-            }
-
-            errorMessage.textContent = ''; // Clear errors
 
             // Generate game link with URL query parameters
             const baseUrl = window.location.origin + '/participant.html';
             const queryParams = `?totalPlayers=${totalPlayers}&mafia=${numMafia}&doctor=${numDoctor}&cop=${numCop}`;
             const gameLink = baseUrl + queryParams;
 
-            generatedLink.innerHTML = `Share this link with players: <a href="${gameLink}" target="_blank">${gameLink}</a>`;
+            document.getElementById('generated-link').innerHTML = `Share this link with players: <a href="${gameLink}" target="_blank">${gameLink}</a>`;
         }
     </script>
 </body>
