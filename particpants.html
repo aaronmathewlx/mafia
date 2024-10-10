@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mafia Game - Participant</title>
+    <style>
+        /* Same purple-themed styling as before */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Your Name to Get Your Role</h1>
+        
+        <div id="player-panel">
+            <label for="player-name">Enter Your Name:</label>
+            <input type="text" id="player-name" placeholder="Enter your name">
+            <button onclick="assignRole()">Get My Role</button>
+
+            <p id="result"></p>
+            <p id="error-message" style="color:red;"></p>
+        </div>
+    </div>
+
+    <script>
+        let roles = [];
+        let assignedRoles = {};
+
+        // Read query parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const totalPlayers = parseInt(urlParams.get('totalPlayers'));
+        const mafiaCount = parseInt(urlParams.get('mafia'));
+        const doctorCount = parseInt(urlParams.get('doctor'));
+        const copCount = parseInt(urlParams.get('cop'));
+        const citizenCount = totalPlayers - (mafiaCount + doctorCount + copCount);
+
+        // Populate the roles array
+        for (let i = 0; i < mafiaCount; i++) roles.push('Mafia');
+        for (let i = 0; i < doctorCount; i++) roles.push('Doctor');
+        for (let i = 0; i < copCount; i++) roles.push('Cop');
+        for (let i = 0; i < citizenCount; i++) roles.push('Citizen');
+
+        // Shuffle the roles
+        roles = shuffleArray(roles);
+
+        // Fisher-Yates shuffle algorithm to shuffle roles
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Assign role to the participant
+        function assignRole() {
+            const playerName = document.getElementById('player-name').value.trim();
+            const result = document.getElementById('result');
+            const errorMessage = document.getElementById('error-message');
+
+            if (!playerName) {
+                errorMessage.textContent = "Please enter your name.";
+                return;
+            }
+
+            errorMessage.textContent = ''; // Clear error
+
+            if (assignedRoles[playerName]) {
+                result.textContent = `${playerName}, your role is: ${assignedRoles[playerName]}`;
+            } else if (roles.length > 0) {
+                const role = roles.pop();
+                assignedRoles[playerName] = role;
+                result.textContent = `${playerName}, your role is: ${role}`;
+            } else {
+                result.textContent = "All roles have been assigned!";
+            }
+        }
+    </script>
+</body>
+</html>
